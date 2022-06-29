@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API_Gateway
+
+  cloud:
+    gateway:
+      routes:
+      - id: PATIENT-SERVICE
+        uri:
+          lb://PATIENT-SERVICE
+        predicates:
+        - Path=/patient/**
+       
+      - id: CHANNELING-SERVICE
+        uri:
+          lb://CHANNELING-SERVICE
+        predicates:
+        - Path=/api/**
+
+      - id: BEDMANAGEMENT-SERVICE
+        uri:
+          lb://BEDMANAGEMENT-SERVICE
+        predicates:
+        - Path=/beds/**
+
+      - id: STORE-SERVICE
+        uri:
+          lb://STORE-SERVICE
+        predicates:
+        - Path=/store/**
+      - id: STAFF-SERVICE
+        uri:
+          lb://STAFF-SERVICE
+        predicates:
+        - Path=/hospital/**
